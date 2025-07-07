@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pamagsalin/components/buttons/record_button.dart';
 import 'package:pamagsalin/components/navbar/bottom_action_bar.dart';
+import 'package:pamagsalin/pages/live_translation_page.dart';
 import 'package:pamagsalin/utils/constants.dart';
 
 class HomePage extends StatelessWidget {
@@ -14,6 +15,7 @@ class HomePage extends StatelessWidget {
           'Pamagsalin',
           style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
         ),
+        automaticallyImplyLeading: false,
       ),
       body: SafeArea(
         child: Column(
@@ -26,7 +28,12 @@ class HomePage extends StatelessWidget {
                 children: [
                   RecordButton(
                     onPressed: () {
-                      print('I WAS PRESSED!');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LiveTranslationPage(),
+                        ),
+                      );
                     },
                   ),
                   Text(
