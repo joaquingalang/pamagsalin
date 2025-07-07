@@ -90,6 +90,9 @@ flutter:
     - family: Manrope
       fonts:
         - asset: assets/fonts/Manrope.ttf
+    - family:
+      fonts:
+        - asset: assets/fonts/Poppints.ttf
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
