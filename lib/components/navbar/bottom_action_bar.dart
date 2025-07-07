@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:pamagsalin/components/sheets/fluency_checker_sheet.dart';
+import 'package:pamagsalin/pages/home_page.dart';
 import 'package:pamagsalin/utils/constants.dart';
 import 'package:pamagsalin/components/buttons/round_button.dart';
 
 class BottomActionBar extends StatelessWidget {
-  const BottomActionBar({
-    super.key,
-  });
+  const BottomActionBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +19,21 @@ class BottomActionBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          RoundButton(iconData: Icons.message, onPressed: () {}),
+          RoundButton(
+            iconData: Icons.message,
+            onPressed: () {
+              showFluencyCheckerSheet(context);
+            },
+          ),
           RoundButton(
             fillColor: kRed300,
             iconData: Icons.mic,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HomePage()),
+              );
+            },
           ),
           RoundButton(iconData: Icons.settings, onPressed: () {}),
         ],
