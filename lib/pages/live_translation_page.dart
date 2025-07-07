@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pamagsalin/components/buttons/record_button.dart';
+import 'package:pamagsalin/components/box/record_box.dart';
+import 'package:pamagsalin/components/box/translation_box.dart';
 import 'package:pamagsalin/components/navbar/bottom_action_bar.dart';
 import 'package:pamagsalin/utils/constants.dart';
 
@@ -14,33 +15,23 @@ class LiveTranslationPage extends StatelessWidget {
           'Live Translation',
           style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
         ),
+        automaticallyImplyLeading: false,
       ),
       body: SafeArea(
         child: Column(
           children: [
             const SizedBox(width: double.infinity),
+
             Expanded(
               flex: 8,
-              child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 32),
-                decoration: BoxDecoration(
-                  color: kRed300,
-                  borderRadius: BorderRadius.circular(30)
-                ),
-              ),
+              child: RecordBox(),
             ),
 
             SizedBox(height: 20),
 
             Expanded(
               flex: 5,
-              child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 32),
-                decoration: BoxDecoration(
-                    color: kGray200,
-                    borderRadius: BorderRadius.circular(30)
-                ),
-              ),
+              child: TranslationBox(),
             ),
 
             // Offset
