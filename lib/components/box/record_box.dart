@@ -45,14 +45,14 @@ class RecordBox extends StatelessWidget {
                 children: [
                   TextSpan(
                     text:
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ultrices ultrices interdum. Duis justo nisi, feugiat nec erat eget, lacinia commodo dui. Nulla id metus elementum, aliquam arcu ',
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ultrices ultrices interdum.',
                   ),
                 ],
               ),
             ),
 
             // Offset
-            SizedBox(height: 10),
+            SizedBox(height: 15),
 
             RichText(
               text: TextSpan(
@@ -64,14 +64,14 @@ class RecordBox extends StatelessWidget {
                 children: [
                   TextSpan(
                     text:
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ultrices ultrices interdum. Duis justo nisi, feugiat nec erat eget, lacinia commodo dui. Nulla id metus elementum, aliquam arcu ',
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ultrices ultrices interdum.',
                   ),
                 ],
               ),
             ),
 
             // Offset
-            SizedBox(height: 10),
+            SizedBox(height: 15),
 
             RichText(
               text: TextSpan(

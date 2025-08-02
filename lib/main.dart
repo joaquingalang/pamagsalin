@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pamagsalin/pages/home_page.dart';
+import 'package:pamagsalin/pages/live_translation_page.dart';
 import 'package:pamagsalin/utils/constants.dart';
 
 void main() {
@@ -12,9 +13,8 @@ class Pamagsalin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomePage(),
+      home: LiveTranslationPage(),
       theme: ThemeData(
-        fontFamily: "Marope",
         scaffoldBackgroundColor: kGray100,
         appBarTheme: AppBarTheme(
           color: Colors.transparent,

@@ -20,7 +20,7 @@ class TranslationBox extends StatelessWidget {
             Align(
               alignment: Alignment.center,
               child: Transform.translate(
-                offset: Offset(0, -15),
+                offset: Offset(0, -20),
                 child: Icon(
                   Icons.more_horiz,
                   color: kRed300,
@@ -31,7 +31,7 @@ class TranslationBox extends StatelessWidget {
             Align(
               alignment: Alignment.center,
               child: Transform.translate(
-                offset: Offset(0, 30),
+                offset: Offset(0, 40),
                 child: Text(
                   "Hang tight, we're catching every word...",
                   style: TextStyle(color: kGray100),

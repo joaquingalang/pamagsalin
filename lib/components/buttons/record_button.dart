@@ -1,13 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:pamagsalin/utils/constants.dart';
 
-class RecordButton extends StatelessWidget {
+class RecordButton extends StatefulWidget {
   const RecordButton({super.key, required this.onPressed});
 
   final VoidCallback onPressed;
 
   @override
+  State<RecordButton> createState() => _RecordButtonState();
+}
+
+class _RecordButtonState extends State<RecordButton>
+    with TickerProviderStateMixin {
+  late AnimationController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller =
+        AnimationController(
+            vsync: this,
+            duration: Duration(seconds: 1),
+          )
+          ..forward()
+          ..repeat(reverse: true);
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print(controller.value);
     return Stack(
       children: [
         Align(
@@ -40,7 +62,7 @@ class RecordButton extends StatelessWidget {
           child: Transform.translate(
             offset: Offset(0, 62.5),
             child: GestureDetector(
-              onTap: onPressed,
+              onTap: widget.onPressed,
               child: Container(
                 width: 135,
                 height: 135,

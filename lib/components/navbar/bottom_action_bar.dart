@@ -10,6 +10,7 @@ class BottomActionBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(bottom: 15),
       padding: EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
         color: Colors.white,
