@@ -1,49 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:pamagsalin/components/buttons/record_button.dart';
-import 'package:pamagsalin/components/navbar/bottom_action_bar.dart';
-import 'package:pamagsalin/pages/live_translation_page.dart';
 import 'package:pamagsalin/utils/constants.dart';
+import 'package:pamagsalin/components/gradient/gradient_background.dart';
+import 'package:pamagsalin/components/gradient//gradient_text.dart';
+import 'package:pamagsalin/components/buttons/round_icon_button.dart';
+import 'package:pamagsalin/components/buttons/record_button.dart';
+
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Pamagsalin',
-          style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-        ),
-        automaticallyImplyLeading: false,
-      ),
-      body: SafeArea(
+      body: GradientBackground(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(width: double.infinity),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                spacing: 45,
-                children: [
-                  RecordButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => LiveTranslationPage(),
-                        ),
-                      );
-                    },
-                  ),
-                  Text(
-                    'Hit the mic to get started...',
-                    style: TextStyle(color: kGray300),
-                  ),
-                ],
-              ),
+            // Offset
+            const SizedBox(height: 50),
+
+            // AppBar
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Mayap a abak!',
+                  style: kPoppinsBodyMedium,
+                ),
+                RoundIconButton(
+                  padding: EdgeInsets.all(8),
+                  onPressed: () {},
+                  icon: Icon(Icons.search, color: Colors.white, size: 23),
+                ),
+              ],
             ),
-            BottomActionBar(),
+
+            // Welcome Message
+            GradientText(
+              'Speak\nKapampangan.\nUnderstand\nEnglish.',
+              style: kPoppinsTitleLarge,
+            ),
+
+            // Record Button
+            Expanded(child: Center(child: RecordButton(onPressed: () {}))),
           ],
         ),
       ),

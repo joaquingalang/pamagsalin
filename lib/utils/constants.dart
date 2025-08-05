@@ -1,16 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-// GRAY COLORS
-const Color kGray100 = Color(0xFFECECEC);
-const Color kGray200 = Color(0xFF494949);
-const Color kGray300 = Color(0xFF333338);
-const Color kGray400 = Color(0xFF252222);
-const Color kGray500 = Color(0xFF202020);
+// BLACK COLORS
+const Color kBlack100 = Color(0xFF020202);
+const Color kGray100 = Color(0xFF969696);
+const Color kGray200 = Color(0xFF7C7C7C);
 
-// RED COLORS
-const Color kRed100 = Color(0x1EEC5951);
-const Color kRed200 = Color(0x46EC5951);
-const Color kRed300 = Color(0xFFEC5951);
+// PURPLE COLORS
+const Color kPink100 = Color(0xFFFF97E0);
+const Color kPink200 = Color(0xFF423840);
+const Color kPink300 = Color(0xFF321F2E);
 
-// Green
-const Color kGreen100 = Color(0xFF5BCD98);
+// TEXT STYLES
+
+final TextStyle kPoppinsTitleLarge = GoogleFonts.poppins(
+  textStyle: TextStyle(
+    fontSize: 36,
+  ),
+);
+
+final TextStyle kPoppinsTitleMedium = GoogleFonts.poppins(
+  textStyle: TextStyle(
+    color: Colors.white,
+    fontSize: 24,
+  ),
+);
+
+final TextStyle kPoppinsBodyMedium = GoogleFonts.poppins(
+  textStyle: TextStyle(
+    color: Colors.white.withOpacity(0.25),
+    fontSize: 18,
+  ),
+);
+
+final TextStyle kPoppinsBodySmall = GoogleFonts.poppins(
+  textStyle: TextStyle(
+    color: Colors.white,
+    fontSize: 14,
+  ),
+);
+
+final TextStyle kPoppinsLabel = GoogleFonts.poppins(
+  textStyle: TextStyle(
+    color: Colors.white.withOpacity(0.25),
+    fontSize: 12,
+  ),
+);
