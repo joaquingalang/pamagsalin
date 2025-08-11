@@ -1,39 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:pamagsalin/utils/constants.dart';
+import 'package:pamagsalin/models/entry_model.dart';
+import 'package:sizer/sizer.dart';
 import 'package:pamagsalin/components/tiles/glossary_tile.dart';
 
 class GlosarryListView extends StatelessWidget {
-  const GlosarryListView({super.key});
+  const GlosarryListView({super.key, required this.entries});
+
+  final List entries;
 
   List<Widget> buildGlossary() {
-    const List glossary = [
-      ['a, à', '(particle) 1. introductory exclamation... '],
-      ['abàgat', 'n. southern breeze'],
-      ['àbak', 'or kayabakan v. mayabak, mayayabak... '],
-      ['abakâ', 'n. the abaca plant, fiber, or cloth'],
-      ['a, à', '(particle) 1. introductory exclamation... '],
-      ['abàgat', 'n. southern breeze'],
-      ['àbak', 'or kayabakan v. mayabak, mayayabak... '],
-      ['abakâ', 'n. the abaca plant, fiber, or cloth'],
-      ['a, à', '(particle) 1. introductory exclamation... '],
-      ['abàgat', 'n. southern breeze'],
-      ['àbak', 'or kayabakan v. mayabak, mayayabak... '],
-      ['abakâ', 'n. the abaca plant, fiber, or cloth'],
-    ];
-
     List<Widget> glossaryList = [];
-
-    for (List entry in glossary) {
-      String word = entry[0];
-      String definition = entry[1];
-
+    for (EntryModel entry in entries) {
       glossaryList.add(Divider(color: kPink200));
 
-      Widget entryRow = GlossaryTile(word: word, definition: definition);
+      Widget entryRow = GlossaryTile(entry: entry);
       glossaryList.add(entryRow);
     }
 
-    glossaryList.add(SizedBox(height: 50));
+    glossaryList.add(SizedBox(height: 25.h));
 
     return glossaryList;
   }
@@ -50,7 +35,9 @@ class GlosarryListView extends StatelessWidget {
           end: Alignment.bottomCenter,
         ).createShader(bounds);
       },
-      child: ListView(children: buildGlossary()),
+      child: ListView(
+        children: buildGlossary(),
+      ),
     );
   }
 }

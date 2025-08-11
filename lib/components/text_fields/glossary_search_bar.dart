@@ -4,7 +4,10 @@ import 'package:pamagsalin/utils/constants.dart';
 class GlossarySearchBar extends StatelessWidget {
   const GlossarySearchBar({
     super.key,
+    required this.onSubmit,
   });
+
+  final void Function(String) onSubmit;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +26,9 @@ class GlossarySearchBar extends StatelessWidget {
           icon: Icon(Icons.search, color: Colors.white, size: 23),
           border: InputBorder.none,
         ),
+        onSubmitted: (value) {
+          onSubmit(value);
+        },
       ),
     );
   }

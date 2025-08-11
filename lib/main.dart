@@ -3,7 +3,8 @@ import 'package:pamagsalin/utils/constants.dart';
 import 'package:pamagsalin/pages/home_page.dart';
 import 'package:pamagsalin/pages/translation_page.dart';
 import 'package:pamagsalin/pages/glossary_page.dart';
-import 'package:pamagsalin/pages/word_page.dart';
+import 'package:pamagsalin/pages/entry_page.dart';
+import 'package:sizer/sizer.dart';
 
 void main() {
   runApp(Pamagsalin());
@@ -14,12 +15,16 @@ class Pamagsalin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: HomePage(),
-      theme: ThemeData(
-        scaffoldBackgroundColor: kBlack100,
-      ),
-      debugShowCheckedModeBanner: false,
+    return Sizer(
+      builder: (context, orientation, screenType) {
+        return MaterialApp(
+          home: HomePage(),
+          theme: ThemeData(
+            scaffoldBackgroundColor: kBlack100,
+          ),
+          debugShowCheckedModeBanner: false,
+        );
+      }
     );
   }
 }
