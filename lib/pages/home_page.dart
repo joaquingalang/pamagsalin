@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:pamagsalin/pages/glossary_page.dart';
 import 'package:pamagsalin/utils/constants.dart';
 import 'package:pamagsalin/components/gradient/gradient_background.dart';
 import 'package:pamagsalin/components/gradient//gradient_text.dart';
 import 'package:pamagsalin/components/buttons/round_icon_button.dart';
 import 'package:pamagsalin/components/buttons/record_button.dart';
-
+import 'package:pamagsalin/utils/time_helpers.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: GradientBackground(
         child: Column(
@@ -24,13 +24,14 @@ class HomePage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'Mayap a abak!',
-                  style: kPoppinsBodyMedium,
-                ),
+                Text('Mayap a ${getTimeOfDay()}!', style: kPoppinsBodyMedium),
                 RoundIconButton(
                   padding: EdgeInsets.all(8),
-                  onPressed: () {},
+                  onPressed:
+                      () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => GlossaryPage()),
+                      ),
                   icon: Icon(Icons.search, color: Colors.white, size: 23),
                 ),
               ],
