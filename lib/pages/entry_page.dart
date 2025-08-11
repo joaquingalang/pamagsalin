@@ -1,13 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:pamagsalin/components/gradient/gradient_background.dart';
 import 'package:pamagsalin/components/gradient/gradient_text.dart';
-import 'package:pamagsalin/components/text_fields/glossary_search_bar.dart';
-import 'package:pamagsalin/components/list_views/glossary_list_view.dart';
 import 'package:pamagsalin/components/buttons/round_icon_button.dart';
+import 'package:pamagsalin/models/entry_model.dart';
 import 'package:pamagsalin/utils/constants.dart';
 
-class WordPage extends StatelessWidget {
-  const WordPage({super.key});
+class EntryPage extends StatefulWidget {
+  const EntryPage({super.key, required this.entry});
+
+  final EntryModel entry;
+
+  @override
+  State<EntryPage> createState() => _EntryPageState();
+}
+
+class _EntryPageState extends State<EntryPage> {
+
+  bool isClickable = true;
+
+  Future<void> playAudio() async {
+    if (!isClickable) return;
+    final player = AudioPlayer();
+    final UrlSource audioUrl = UrlSource(widget.entry.audio);
+
+    setState(() => isClickable = false);
+
+    await player.play(audioUrl);
+    await Future.delayed(Duration(milliseconds: 1500));
+
+    setState(() => isClickable = true);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +44,7 @@ class WordPage extends StatelessWidget {
                 // Offset
                 const SizedBox(height: 50),
 
-                GlossarySearchBar(),
+                // GlossarySearchBar(),
 
                 // Offset
                 const SizedBox(height: 50),
@@ -35,16 +58,22 @@ class WordPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         spacing: 14,
                         children: [
-                          GradientText('mayap', style: kPoppinsTitleLarge),
-                          RoundIconButton(
-                            icon: Icon(
-                              Icons.volume_down,
-                              color: Colors.white,
-                              size: 25,
+                          GradientText(widget.entry.word, style: kPoppinsTitleLarge),
+
+                          (widget.entry.audio.isNotEmpty) ?
+                          AnimatedOpacity(
+                            opacity: (isClickable) ? 1 : 0.3,
+                            duration: Duration(milliseconds: 500),
+                            child: RoundIconButton(
+                              icon: Icon(
+                                Icons.volume_down,
+                                color: Colors.white,
+                                size: 25,
+                              ),
+                              padding: EdgeInsets.all(3),
+                              onPressed: playAudio,
                             ),
-                            padding: EdgeInsets.all(3),
-                            onPressed: () {},
-                          ),
+                          ) : SizedBox(),
                         ],
                       ),
 
@@ -53,7 +82,7 @@ class WordPage extends StatelessWidget {
 
                       // Definition
                       Text(
-                        'or kayabakan v. mayabak, mayayabak, meyabak; to do something until morning; become morning. n. morning.',
+                        widget.entry.definition,
                         style: kPoppinsBodyMedium.copyWith(
                           fontWeight: FontWeight.w100,
                         ),
@@ -72,7 +101,7 @@ class WordPage extends StatelessWidget {
                 child: RoundIconButton(
                   icon: Icon(Icons.arrow_back, color: Colors.white, size: 40),
                   padding: EdgeInsets.all(16),
-                  onPressed: () {},
+                  onPressed: () => Navigator.pop(context),
                 ),
               ),
             ),
