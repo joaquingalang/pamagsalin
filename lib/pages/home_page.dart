@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pamagsalin/pages/glossary_page.dart';
+import 'package:pamagsalin/pages/translation_page.dart';
 import 'package:pamagsalin/utils/constants.dart';
 import 'package:pamagsalin/components/gradient/gradient_background.dart';
 import 'package:pamagsalin/components/gradient//gradient_text.dart';
@@ -44,7 +45,19 @@ class HomePage extends StatelessWidget {
             ),
 
             // Record Button
-            Expanded(child: Center(child: RecordButton(onPressed: () {}))),
+            Expanded(
+              child: Center(
+                child: RecordButton(
+                  onPressed:
+                      () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TranslationPage(),
+                        ),
+                      ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
