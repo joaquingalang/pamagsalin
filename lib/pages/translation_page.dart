@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pamagsalin/pages/glossary_page.dart';
 import 'package:pamagsalin/utils/constants.dart';
 import 'package:pamagsalin/components/gradient/gradient_background.dart';
 import 'package:pamagsalin/components/buttons/round_icon_button.dart';
@@ -13,15 +14,15 @@ class TranslationPage extends StatefulWidget {
 }
 
 class _TranslationPageState extends State<TranslationPage> {
-
   late final RecorderController recorderController;
   bool isRecording = false;
 
   @override
   void initState() {
     super.initState();
-    recorderController = RecorderController()
-      ..updateFrequency = const Duration(milliseconds: 100);
+    recorderController =
+        RecorderController()
+          ..updateFrequency = const Duration(milliseconds: 100);
     _requestMicPermission();
   }
 
@@ -52,7 +53,6 @@ class _TranslationPageState extends State<TranslationPage> {
       body: GradientBackground(
         child: Stack(
           children: [
-
             // Main Page
             Column(
               children: [
@@ -63,7 +63,13 @@ class _TranslationPageState extends State<TranslationPage> {
                   alignment: Alignment.centerLeft,
                   child: RoundIconButton(
                     padding: EdgeInsets.all(8),
-                    onPressed: () {},
+                    onPressed:
+                        () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => GlossaryPage(),
+                          ),
+                        ),
                     icon: Icon(Icons.search, color: Colors.white, size: 23),
                   ),
                 ),
@@ -89,11 +95,7 @@ class _TranslationPageState extends State<TranslationPage> {
                   ),
                 ),
 
-                Text(
-                  'Makananu na ka?',
-                  style: kPoppinsTitleMedium,
-                ),
-
+                Text('Makananu na ka?', style: kPoppinsTitleMedium),
 
                 AudioWaveforms(
                   recorderController: recorderController,
@@ -117,12 +119,15 @@ class _TranslationPageState extends State<TranslationPage> {
                 child: RoundIconButton(
                   padding: EdgeInsets.all(16),
                   backgroundColor: isRecording ? kPink100 : kPink200,
-                  icon: Icon(Icons.mic, color: isRecording ? kBlack100 : Colors.white, size: 30),
+                  icon: Icon(
+                    Icons.mic,
+                    color: isRecording ? kBlack100 : Colors.white,
+                    size: 30,
+                  ),
                   onPressed: _toggleRecording,
                 ),
               ),
             ),
-
           ],
         ),
       ),
