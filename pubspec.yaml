@@ -42,6 +42,8 @@ dependencies:
   diacritic: ^0.1.6
   sizer: ^3.0.5
   audioplayers: ^6.5.0
+  record: ^6.0.0
+  path_provider: ^2.1.5
 
 dev_dependencies:
   flutter_test:
