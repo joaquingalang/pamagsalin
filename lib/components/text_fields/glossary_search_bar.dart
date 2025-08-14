@@ -2,17 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:pamagsalin/utils/constants.dart';
 
 class GlossarySearchBar extends StatelessWidget {
-  const GlossarySearchBar({
-    super.key,
-    required this.onSubmit,
-  });
+  const GlossarySearchBar({super.key, required this.onSubmit});
 
   final void Function(String) onSubmit;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 15),
       decoration: BoxDecoration(
         color: kPink200,
         borderRadius: BorderRadius.circular(90),
@@ -23,7 +19,17 @@ class GlossarySearchBar extends StatelessWidget {
         cursorHeight: 20,
         style: kPoppinsLabel,
         decoration: InputDecoration(
-          icon: Icon(Icons.search, color: Colors.white, size: 23),
+          prefixIcon: Icon(Icons.search, size: 23),
+          prefixIconColor: MaterialStateColor.resolveWith(
+            (states) =>
+                states.contains(MaterialState.focused)
+                    ? kPink100
+                    : Colors.white,
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(90),
+            borderSide: BorderSide(color: kPink100, width: 2),
+          ),
           border: InputBorder.none,
         ),
         onSubmitted: (value) {
