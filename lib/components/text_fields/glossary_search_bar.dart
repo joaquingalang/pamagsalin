@@ -30,7 +30,10 @@ class GlossarySearchBar extends StatelessWidget {
             borderRadius: BorderRadius.circular(90),
             borderSide: BorderSide(color: kPink100, width: 2),
           ),
-          border: InputBorder.none,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(90),
+            borderSide: BorderSide(color: kPink200, width: 2),
+          ),
         ),
         onSubmitted: (value) {
           onSubmit(value);
