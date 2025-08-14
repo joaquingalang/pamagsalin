@@ -3,9 +3,7 @@ import 'package:pamagsalin/components/gradient/gradient_background.dart';
 import 'package:pamagsalin/components/text_fields/glossary_search_bar.dart';
 import 'package:pamagsalin/components/list_views/glossary_list_view.dart';
 import 'package:pamagsalin/components/buttons/round_icon_button.dart';
-import 'package:pamagsalin/models/entry_model.dart';
-import 'package:pamagsalin/servives/talabaldugan_service.dart';
-import 'package:sizer/sizer.dart';
+import 'package:pamagsalin/services/talabaldugan_service.dart';
 
 class GlossaryPage extends StatefulWidget {
   const GlossaryPage({super.key});
@@ -15,11 +13,16 @@ class GlossaryPage extends StatefulWidget {
 }
 
 class _GlossaryPageState extends State<GlossaryPage> {
-  final TalabalduganService talabaldugan = TalabalduganService();
+  final TalabalduganService glossary = TalabalduganService();
 
   List matchedEntries = [];
   String searchedWord = '';
   bool isLoading = true;
+
+  Future<void> _loadEntries() async {
+    await glossary.loadCsv('assets/data/talabaldugan.csv');
+    await _searchWords();
+  }
 
   Future<void> _searchWords() async {
     setState(() {
@@ -27,9 +30,9 @@ class _GlossaryPageState extends State<GlossaryPage> {
     });
 
     if (searchedWord.isEmpty) {
-      matchedEntries = await talabaldugan.fetchIdRange();
+      matchedEntries = glossary.getAllEntries();
     } else {
-      matchedEntries = await talabaldugan.fetchWordMatches(searchedWord);
+      matchedEntries = glossary.searchByWord(searchedWord);
     }
     setState(() {
       isLoading = false;
@@ -46,13 +49,13 @@ class _GlossaryPageState extends State<GlossaryPage> {
   @override
   void initState() {
     super.initState();
-    _searchWords();
-
+    _loadEntries();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: GradientBackground(
         child: Stack(
           children: [
@@ -73,9 +76,7 @@ class _GlossaryPageState extends State<GlossaryPage> {
                               color: Colors.white,
                             ),
                           )
-                          : GlosarryListView(
-                            entries: matchedEntries,
-                          ),
+                          : GlosarryListView(entries: matchedEntries),
                 ),
               ],
             ),
