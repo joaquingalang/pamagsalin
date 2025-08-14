@@ -3,6 +3,7 @@ import 'package:pamagsalin/pages/glossary_page.dart';
 import 'package:pamagsalin/utils/constants.dart';
 import 'package:pamagsalin/components/gradient/gradient_background.dart';
 import 'package:pamagsalin/components/buttons/round_icon_button.dart';
+import 'package:pamagsalin/components/waveforms/translator_waveforms.dart';
 import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -97,16 +98,13 @@ class _TranslationPageState extends State<TranslationPage> {
 
                 Text('Makananu na ka?', style: kPoppinsTitleMedium),
 
-                AudioWaveforms(
-                  recorderController: recorderController,
-                  size: Size(MediaQuery.of(context).size.width, 120),
-                  waveStyle: const WaveStyle(
-                    waveColor: Colors.greenAccent,
-                    spacing: 6.0,
-                    extendWaveform: true,
-                    showMiddleLine: false,
+                Expanded(
+                  child: Visibility(
+                    visible: isRecording,
+                    child: TraslatorWaveForms(
+                      recorderController: recorderController,
+                    ),
                   ),
-                  enableGesture: false,
                 ),
               ],
             ),
@@ -124,6 +122,7 @@ class _TranslationPageState extends State<TranslationPage> {
                     color: isRecording ? kBlack100 : Colors.white,
                     size: 30,
                   ),
+                  animationDuration: Duration(milliseconds: 500),
                   onPressed: _toggleRecording,
                 ),
               ),
