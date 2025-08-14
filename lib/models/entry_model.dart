@@ -21,13 +21,13 @@ class EntryModel {
   }
 
   String getShortWord() {
-    final int maxLength = 20;
+    final int maxLength = 18;
     if (word.length < maxLength) return word;
     return "${word.substring(0, maxLength-1)}...";
   }
 
   String getShortDefinition() {
-    final int maxLength = (word.length < 12) ? 32 : 24;
+    final int maxLength = (word.length < 12) ? 32 : 20;
     if (definition.length < maxLength) return definition;
     return "${definition.substring(0, maxLength-1)}...";
   }
