@@ -61,18 +61,15 @@ class _EntryPageState extends State<EntryPage> {
                           GradientText(widget.entry.word, style: kPoppinsTitleLarge),
 
                           (widget.entry.audio.isNotEmpty) ?
-                          AnimatedOpacity(
-                            opacity: (isClickable) ? 1 : 0.3,
-                            duration: Duration(milliseconds: 500),
-                            child: RoundIconButton(
-                              icon: Icon(
-                                Icons.volume_down,
-                                color: Colors.white,
-                                size: 25,
-                              ),
-                              padding: EdgeInsets.all(3),
-                              onPressed: playAudio,
+                          RoundIconButton(
+                            icon: Icon(
+                              Icons.volume_down,
+                              color: (isClickable) ? Colors.white : kBlack100,
+                              size: 25,
                             ),
+                            padding: EdgeInsets.all(3),
+                            backgroundColor: (isClickable) ? kPink200 : kPink100,
+                            onPressed: playAudio,
                           ) : SizedBox(),
                         ],
                       ),
