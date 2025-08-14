@@ -35,6 +35,7 @@ class _EntryPageState extends State<EntryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: GradientBackground(
         child: Stack(
           children: [
@@ -60,7 +61,7 @@ class _EntryPageState extends State<EntryPage> {
                         children: [
                           GradientText(widget.entry.word, style: kPoppinsTitleLarge),
 
-                          (widget.entry.audio.isNotEmpty) ?
+                          (widget.entry.audio.length > 1) ?
                           RoundIconButton(
                             icon: Icon(
                               Icons.volume_down,
