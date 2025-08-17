@@ -28,7 +28,7 @@ class GlosarryListView extends StatelessWidget {
     return ShaderMask(
       shaderCallback: (Rect bounds) {
         return LinearGradient(
-          colors: [Colors.white, kBlack100],
+          colors: [Colors.white, Colors.transparent],
           stops: [0.6, 1],
           tileMode: TileMode.mirror,
           begin: Alignment.topCenter,
