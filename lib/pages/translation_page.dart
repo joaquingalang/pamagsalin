@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:pamagsalin/pages/glossary_page.dart';
 import 'package:pamagsalin/utils/constants.dart';
+import 'package:pamagsalin/services/playlist_player.dart';
+import 'package:pamagsalin/services/vad_stream_recorder.dart';
+import 'package:audio_waveforms/audio_waveforms.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:pamagsalin/components/gradient/gradient_background.dart';
 import 'package:pamagsalin/components/buttons/round_icon_button.dart';
 import 'package:pamagsalin/components/waveforms/translator_waveforms.dart';
-import 'package:audio_waveforms/audio_waveforms.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:pamagsalin/pages/glossary_page.dart';
 
 class TranslationPage extends StatefulWidget {
   const TranslationPage({super.key});
@@ -16,35 +19,68 @@ class TranslationPage extends StatefulWidget {
 
 class _TranslationPageState extends State<TranslationPage> {
   late final RecorderController recorderController;
+  late final StreamVadRecorder streamVadRecorder;
   bool isRecording = false;
+
+  final AudioPlayer audioPlayer = AudioPlayer();
+  String? lastRecordingPath;
+
+  final List<String> audioPaths = [];
 
   @override
   void initState() {
     super.initState();
-    recorderController =
-        RecorderController()
-          ..updateFrequency = const Duration(milliseconds: 100);
-    _requestMicPermission();
+    _initRecorders();
   }
+
+void _initRecorders() {
+  recorderController = RecorderController()
+    ..updateFrequency = const Duration(milliseconds: 100);
+
+  streamVadRecorder = StreamVadRecorder(
+    thresholdDb: -20.0,
+    silenceDurationMs: 1000,
+    onUtterance: (String filePath) async {
+      lastRecordingPath = filePath;
+      debugPrint('Utterance saved to: $filePath');
+      audioPaths.add(filePath);
+      // TODO: Pass filePath to your translation pipeline
+    },
+  );
+
+  _requestMicPermission();
+}
 
   Future<void> _requestMicPermission() async {
     await Permission.microphone.request();
   }
 
   Future<void> _toggleRecording() async {
-    if (isRecording) {
-      final path = await recorderController.stop();
-      setState(() => isRecording = false);
-      debugPrint('Saved recording to: $path');
-    } else {
-      await recorderController.record();
-      setState(() => isRecording = true);
-    }
+  if (isRecording) {
+    await streamVadRecorder.stopListening();
+    await recorderController.stop();
+
+    print('AUDIO PATHS: ');
+    print(audioPaths);
+
+    // Play audio snippets
+    final playList = PlaylistPlayer(audioPaths);
+    await playList.play();
+
+    // audioPaths.clear();
+    setState(() => isRecording = false);
+  } else {
+    setState(() => isRecording = true);
+    await recorderController.record();
+    await streamVadRecorder.startListening();
   }
+}
 
   @override
   void dispose() {
     recorderController.dispose();
+    streamVadRecorder.stopListening();
+    audioPlayer.dispose();
     super.dispose();
   }
 
