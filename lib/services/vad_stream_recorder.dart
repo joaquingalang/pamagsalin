@@ -21,7 +21,7 @@ class StreamVadRecorder {
   StreamVadRecorder({
     this.thresholdDb = -40.0,
     this.minimumDb = -80,
-    this.silenceDurationMs = 800,
+    this.silenceDurationMs = 400,
     this.onUtterance,
   });
 
@@ -38,7 +38,7 @@ class StreamVadRecorder {
       ),
     );
 
-    List<double> lastDecibals = List.generate(3, (index) => -160);
+    List<double> lastDecibals = List.generate(5, (index) => -160);
     // int countdown = 100;
     _subscription = stream.listen((frame) async {
       // _buffer.addAll(frame);
@@ -58,12 +58,11 @@ class StreamVadRecorder {
       }
 
       lastDecibals = updateDecibalList(lastDecibals, currentDb);
-      print(lastDecibals);
+      // print(lastDecibals);
 
       if (_speechDetected && _lastSpeechTime != null) {
         final elapsed = DateTime.now().difference(_lastSpeechTime!).inMilliseconds;
         if (elapsed > silenceDurationMs) {
-          print('SAVING UTTERANCE!');
           await _saveUtterance();
           _buffer.clear();
           _speechDetected = false;
@@ -78,7 +77,6 @@ class StreamVadRecorder {
 
   final wavPath = await saveBufferAsWav(_buffer, 16000, 1);
 
-  print("Utterance saved: $wavPath");
   if (onUtterance != null) onUtterance!(wavPath);
 }
 
