@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pamagsalin/utils/constants.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:pamagsalin/models/translation_message.dart';
 import 'package:pamagsalin/services/audio_processing_queue.dart';
