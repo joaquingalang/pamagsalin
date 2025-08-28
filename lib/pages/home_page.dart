@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pamagsalin/pages/glossary_page.dart';
+import 'package:pamagsalin/pages/test_page.dart';
 import 'package:pamagsalin/pages/translation_page.dart';
 import 'package:pamagsalin/utils/constants.dart';
 import 'package:pamagsalin/components/gradient/gradient_background.dart';
@@ -39,9 +40,17 @@ class HomePage extends StatelessWidget {
             ),
 
             // Welcome Message
-            GradientText(
-              'Speak\nKapampangan.\nUnderstand\nEnglish.',
-              style: kPoppinsTitleLarge,
+            // Temporary Translation Page Trigger
+            GestureDetector(
+              child: GradientText(
+                'Speak\nKapampangan.\nUnderstand\nEnglish.',
+                style: kPoppinsTitleLarge,
+              ),
+              onTap:
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => TestPage()),
+                  ),
             ),
 
             // Record Button
