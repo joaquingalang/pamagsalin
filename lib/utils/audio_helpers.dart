@@ -57,3 +57,22 @@ bool hasHighDecibals(List<double> decibals, double thresholdDb) {
   }
   return false;
 }
+
+Float32List pcm16BufferToFloat32(List<int> buffer) {
+  // Each sample is 2 bytes (little endian)
+  final int sampleCount = buffer.length ~/ 2;
+  final floatData = Float32List(sampleCount);
+
+  for (int i = 0; i < sampleCount; i++) {
+    // Combine two bytes into a signed 16-bit integer
+    int byteIndex = i * 2;
+    int lo = buffer[byteIndex];
+    int hi = buffer[byteIndex + 1];
+    int sample = (hi << 8) | lo;
+    // Convert to signed
+    if (sample >= 0x8000) sample -= 0x10000;
+    // Normalize to [-1, 1]
+    floatData[i] = sample / 32768.0;
+  }
+  return floatData;
+}
