@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pamagsalin/pages/test_page.dart';
 import 'package:pamagsalin/utils/constants.dart';
 import 'package:pamagsalin/pages/home_page.dart';
-import 'package:pamagsalin/pages/translation_page.dart';
-import 'package:pamagsalin/pages/glossary_page.dart';
-import 'package:pamagsalin/pages/entry_page.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {
