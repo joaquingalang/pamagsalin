@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pamagsalin/utils/constants.dart';
 import 'package:pamagsalin/components/gradient/gradient_background.dart';
 import 'package:pamagsalin/components/headers/word_header.dart';
 import 'package:pamagsalin/components/buttons/round_icon_button.dart';
 import 'package:pamagsalin/models/entry_model.dart';
-import 'package:pamagsalin/utils/constants.dart';
 
 class EntryPage extends StatefulWidget {
   const EntryPage({super.key, required this.entry});
