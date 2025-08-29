@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pamagsalin/components/gradient/gradient_background.dart';
+import 'package:pamagsalin/components/loading_indicator/loading_indicator.dart';
 import 'package:pamagsalin/components/text_fields/glossary_search_bar.dart';
 import 'package:pamagsalin/components/list_views/glossary_list_view.dart';
 import 'package:pamagsalin/components/buttons/round_icon_button.dart';
@@ -15,9 +16,9 @@ class GlossaryPage extends StatefulWidget {
 class _GlossaryPageState extends State<GlossaryPage> {
   final TalabalduganService glossary = TalabalduganService();
 
-  List matchedEntries = [];
-  String searchedWord = '';
-  bool isLoading = true;
+  List _matchedEntries = [];
+  String _searchedWord = '';
+  bool _isLoading = true;
 
   Future<void> _loadEntries() async {
     await glossary.loadCsv('assets/data/talabaldugan.csv');
@@ -26,22 +27,22 @@ class _GlossaryPageState extends State<GlossaryPage> {
 
   Future<void> _searchWords() async {
     setState(() {
-      isLoading = true;
+      _isLoading = true;
     });
 
-    if (searchedWord.isEmpty) {
-      matchedEntries = glossary.getAllEntries();
+    if (_searchedWord.isEmpty) {
+      _matchedEntries = glossary.getAllEntries();
     } else {
-      matchedEntries = glossary.searchByWord(searchedWord);
+      _matchedEntries = glossary.searchByWord(_searchedWord);
     }
     setState(() {
-      isLoading = false;
+      _isLoading = false;
     });
   }
 
   void _updateSearchedWord(String value) {
     setState(() {
-      searchedWord = value;
+      _searchedWord = value;
     });
     _searchWords();
   }
@@ -70,13 +71,9 @@ class _GlossaryPageState extends State<GlossaryPage> {
                 // Record Button
                 Expanded(
                   child:
-                      (isLoading)
-                          ? Center(
-                            child: CircularProgressIndicator(
-                              color: Colors.white,
-                            ),
-                          )
-                          : GlosarryListView(entries: matchedEntries),
+                      (_isLoading)
+                          ? SizedBox()
+                          : GlosarryListView(entries: _matchedEntries),
                 ),
               ],
             ),
