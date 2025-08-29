@@ -26,6 +26,14 @@ final TextStyle kPoppinsTitleMedium = GoogleFonts.poppins(
   ),
 );
 
+final TextStyle kPoppinsBodyLarge = GoogleFonts.poppins(
+  textStyle: TextStyle(
+    color: Colors.white,
+    fontSize: 22,
+  ),
+);
+
+
 final TextStyle kPoppinsBodyMedium = GoogleFonts.poppins(
   textStyle: TextStyle(
     color: Colors.white.withOpacity(0.25),
