@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:pamagsalin/utils/regex_helpers.dart';
 
 class TranslationService {
   static const String baseUrl = "https://kruokruo-nllb-200-kpm-api.hf.space";
@@ -25,7 +26,8 @@ class TranslationService {
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
-      return data["translation"] ?? "(no translation)";
+      final translation = fixIm(data['translation']);
+      return translation;
     } else {
       throw Exception("Translation failed: ${response.statusCode}");
     }
