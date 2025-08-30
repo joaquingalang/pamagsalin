@@ -42,10 +42,13 @@ class RecordButton extends StatelessWidget {
             ),
           ),
           Center(
-            child: RoundIconButton(
-              padding: EdgeInsets.all(50),
-              onPressed: onPressed,
-              icon: Icon(Icons.mic, color: Colors.white, size: 92),
+            child: Hero(
+              tag: 'record-btn',
+              child: RoundIconButton(
+                padding: EdgeInsets.all(35),
+                onPressed: onPressed,
+                icon: Icon(Icons.mic, color: Colors.white, size: 105),
+              ),
             ),
           ),
         ],
