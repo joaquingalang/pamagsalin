@@ -33,7 +33,7 @@ class TalabalduganService {
   List<EntryModel> searchByWord(String word) {
     final query = word.toLowerCase();
     return _entries
-        .where((entry) => entry.word.toLowerCase().contains(query))
+        .where((entry) => entry.word.toLowerCase().startsWith(query))
         .toList();
   }
 
