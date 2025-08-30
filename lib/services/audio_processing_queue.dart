@@ -33,10 +33,10 @@ class AudioProcessingQueue {
 
     try {
       final asrText = await _sendToAsr(audioPath);
-      onAsrComplete(asrText!);
+      onAsrComplete(asrText!.toLowerCase());
 
       final translatedText = await _sentToTranslator(asrText);
-      onTranslationComplete(asrText, translatedText!);
+      onTranslationComplete(asrText.toLowerCase(), translatedText!.toLowerCase());
     } catch (e) {
       print('Error processing $audioPath: $e');
     } finally {
