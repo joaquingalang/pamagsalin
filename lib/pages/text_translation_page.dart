@@ -17,6 +17,7 @@ class _TranslateTextPageState extends State<TranslateTextPage> {
   final TextEditingController _textController = TextEditingController();
   String translated = '';
   bool isTranslating = false;
+  DateTime lastPressedTime = DateTime.now();
 
   @override
   void initState() {
@@ -33,14 +34,18 @@ class _TranslateTextPageState extends State<TranslateTextPage> {
   }
 
   Future<void> _onTranslate() async {
-    setState(() {
-      isTranslating = true;
-    });
-    final result = await _translationService.translate(_textController.text);
-    setState(() {
-      translated = result;
-      isTranslating = false;
-    });
+    final currentTime = DateTime.now();
+    if (currentTime.difference(lastPressedTime).inSeconds >= 2) {
+      lastPressedTime = currentTime;
+      setState(() {
+        isTranslating = true;
+      });
+      final result = await _translationService.translate(_textController.text);
+      setState(() {
+        translated = result;
+        isTranslating = false;
+      });
+    }
   }
 
   @override
