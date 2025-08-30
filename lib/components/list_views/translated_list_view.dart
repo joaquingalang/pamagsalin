@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:pamagsalin/utils/constants.dart';
 import 'package:pamagsalin/models/translation_message.dart';
 
-
 class TranslatedListView extends StatefulWidget {
-  const TranslatedListView({super.key, required this.messages});
+  const TranslatedListView({
+    super.key,
+    required this.messages,
+    this.isListening = false,
+  });
 
   final List<TranslationMessage> messages;
+  final bool isListening;
 
   @override
   State<TranslatedListView> createState() => _TranslatedListViewState();
@@ -67,7 +71,15 @@ class _TranslatedListViewState extends State<TranslatedListView> {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 160,
-      child: ListView(controller: _scrollController, children: buildLines()),
+      child: ListView(
+        controller: _scrollController,
+        children: [
+          ...buildLines(),
+          (widget.isListening
+              ? Image.asset('assets/images/loading_dots.gif', height: 50)
+              : SizedBox()),
+        ],
+      ),
     );
   }
 }

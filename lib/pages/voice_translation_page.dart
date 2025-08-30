@@ -25,12 +25,13 @@ class _VoiceTranslationPageState extends State<VoiceTranslationPage> {
   late final RecorderController recorderController;
   late final StreamVadRecorder streamVadRecorder;
   List<TranslationMessage> messages = [];
-  List<String> audioPaths = [];
   bool isRecording = false;
+  bool isListening = false;
 
   final AudioPlayer audioPlayer = AudioPlayer();
   late final TextToSpeechService _ttsService;
   late final AudioProcessingQueue processingQueue;
+  DateTime lastPressedTime = DateTime.now().subtract(Duration(seconds: 2));
 
   @override
   void initState() {
@@ -48,11 +49,14 @@ class _VoiceTranslationPageState extends State<VoiceTranslationPage> {
     streamVadRecorder = StreamVadRecorder(
       thresholdDb: -20.0,
       silenceDurationMs: 1000,
+      // onSpike: () {
+      //
+      // },
+      // onDip: () {
+      //   setState(() => isListening = false);
+      // },
       onUtterance: (String audioPath) {
         processingQueue.add(audioPath);
-        setState(() {
-          audioPaths.add(audioPath);
-        });
       },
     );
 
@@ -61,18 +65,22 @@ class _VoiceTranslationPageState extends State<VoiceTranslationPage> {
 
   void _initProcessingQueue() {
     processingQueue = AudioProcessingQueue(
+      onProcessStart: () {
+        setState(() => isListening = true);
+      },
       onAsrComplete: (asrText) {
         setState(() {
           messages.add(TranslationMessage(asrText: asrText));
+          isListening = false;
         });
       },
       onTranslationComplete: (asrText, translated) {
         setState(() {
-          final index =
-          messages.indexWhere((msg) => msg.asrText == asrText);
+          final index = messages.indexWhere((msg) => msg.asrText == asrText);
           if (index != -1) {
-            messages[index] =
-                messages[index].copyWith(translatedText: translated);
+            messages[index] = messages[index].copyWith(
+              translatedText: translated,
+            );
           }
         });
       },
@@ -89,18 +97,23 @@ class _VoiceTranslationPageState extends State<VoiceTranslationPage> {
   }
 
   Future<void> _toggleRecording() async {
-    if (isRecording) {
-      await streamVadRecorder.stopListening();
-      await recorderController.stop();
-      setState(() => isRecording = false);
-      PlaylistPlayer(audioPaths).play();
-    } else {
-      setState(() => isRecording = true);
-      setState(() {
-        messages = [];
-      });
-      await recorderController.record();
-      await streamVadRecorder.startListening();
+    final currentTime = DateTime.now();
+    if (currentTime.difference(lastPressedTime).inSeconds >= 2) {
+      lastPressedTime = currentTime;
+      if (isRecording) {
+        await streamVadRecorder.stopListening();
+        await recorderController.stop();
+        setState(() {
+          isRecording = false;
+        });
+      } else {
+        setState(() => isRecording = true);
+        setState(() {
+          messages = [];
+        });
+        await recorderController.record();
+        await streamVadRecorder.startListening();
+      }
     }
   }
 
@@ -128,8 +141,7 @@ class _VoiceTranslationPageState extends State<VoiceTranslationPage> {
                   alignment: Alignment.centerLeft,
                   child: RoundIconButton(
                     padding: EdgeInsets.all(8),
-                    onPressed:
-                        () => Navigator.pop(context),
+                    onPressed: () => Navigator.pop(context),
                     icon: Icon(Icons.arrow_back, color: Colors.white, size: 23),
                   ),
                 ),
@@ -144,7 +156,10 @@ class _VoiceTranslationPageState extends State<VoiceTranslationPage> {
 
                 const SizedBox(height: 100),
 
-                TranslatedListView(messages: messages),
+                TranslatedListView(
+                  messages: messages,
+                  isListening: isListening,
+                ),
 
                 (!isRecording && messages.isNotEmpty
                     ? Padding(

@@ -14,10 +14,12 @@ class AudioProcessingQueue {
 
   final Function(String) onAsrComplete;
   final Function(String, String) onTranslationComplete;
+  final VoidCallback onProcessStart;
 
   AudioProcessingQueue({
     required this.onAsrComplete,
     required this.onTranslationComplete,
+    required this.onProcessStart
   });
 
   Future<void> add(String audioPath) async {
@@ -32,6 +34,7 @@ class AudioProcessingQueue {
     final audioPath = _queue.removeFirst();
 
     try {
+      onProcessStart();
       final asrText = await _sendToAsr(audioPath);
       onAsrComplete(asrText!.toLowerCase());
 
