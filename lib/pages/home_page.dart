@@ -8,9 +8,10 @@ import 'package:pamagsalin/components/gradient/gradient_background.dart';
 import 'package:pamagsalin/components/gradient//gradient_text.dart';
 import 'package:pamagsalin/components/buttons/round_icon_button.dart';
 import 'package:pamagsalin/components/buttons/record_button.dart';
+import 'package:pamagsalin/components/buttons/translate_text_button.dart';
 import 'package:pamagsalin/pages/glossary_page.dart';
-import 'package:pamagsalin/pages/test_page.dart';
-import 'package:pamagsalin/pages/translation_page.dart';
+import 'package:pamagsalin/pages/text_translation_page.dart';
+import 'package:pamagsalin/pages/voice_translation_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -82,16 +83,9 @@ class _HomePageState extends State<HomePage> {
 
                     // Welcome Message
                     // Temporary Translation Page Trigger
-                    GestureDetector(
-                      child: GradientText(
-                        'Speak\nKapampangan.\nUnderstand\nEnglish.',
-                        style: kPoppinsTitleLarge,
-                      ),
-                      onTap:
-                          () => Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => TestPage()),
-                          ),
+                    GradientText(
+                      'Speak\nKapampangan.\nUnderstand\nEnglish.',
+                      style: kPoppinsTitleLarge,
                     ),
 
                     // Record Button
@@ -102,12 +96,14 @@ class _HomePageState extends State<HomePage> {
                               () => Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => TranslationPage(),
+                                  builder: (context) => VoiceTranslationPage(),
                                 ),
                               ),
                         ),
                       ),
                     ),
+
+                    TranslateTextButton(),
                   ],
                 )
                 : LabeledLoadingIndicator(),
@@ -115,5 +111,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-
