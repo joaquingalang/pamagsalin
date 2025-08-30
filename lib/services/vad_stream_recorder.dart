@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:typed_data';
 import 'dart:math';
+import 'package:flutter/cupertino.dart';
 import 'package:record/record.dart';
 import 'package:pamagsalin/utils/audio_helpers.dart';
 
@@ -80,6 +81,7 @@ class StreamVadRecorder {
 
       if (_speechDetected && _lastSpeechTime != null) {
         final elapsed = DateTime.now().difference(_lastSpeechTime!).inMilliseconds;
+
 
         // Check if recent levels are consistently below threshold
         final recentLow = lastDecibals.where((db) => db < _dynamicThreshold - 3.0).length >= 3;
@@ -161,6 +163,7 @@ class StreamVadRecorder {
   }
 
   Future<void> stopListening() async {
+    await _saveUtterance();
     await _subscription?.cancel();
     await _recorder.stop();
     _buffer.clear();
