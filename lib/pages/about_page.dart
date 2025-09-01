@@ -14,6 +14,7 @@ class AboutPage extends StatelessWidget {
     return Scaffold(
       body: GradientBackground(
         child: ListView(
+          physics: ClampingScrollPhysics(),
           children: [
             // Offset
             const SizedBox(height: 70),
