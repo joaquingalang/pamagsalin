@@ -14,12 +14,14 @@ class AudioProcessingQueue {
 
   final Function(String) onAsrComplete;
   final Function(String, String) onTranslationComplete;
-  final VoidCallback onProcessStart;
+  final VoidCallback onStart;
+  final VoidCallback onComplete;
 
   AudioProcessingQueue({
     required this.onAsrComplete,
     required this.onTranslationComplete,
-    required this.onProcessStart
+    required this.onStart,
+    required this.onComplete,
   });
 
   Future<void> add(String audioPath) async {
@@ -28,15 +30,25 @@ class AudioProcessingQueue {
   }
 
   Future<void> _processNext() async {
-    if (_isProcessing || _queue.isEmpty) return;
+    if (_isProcessing) return;
+
+    if (_queue.isEmpty) {
+      onComplete();
+      return;
+    }
 
     _isProcessing = true;
     final audioPath = _queue.removeFirst();
 
     try {
-      onProcessStart();
+      onStart();
       final asrText = await _sendToAsr(audioPath);
-      onAsrComplete(asrText!.toLowerCase());
+
+      if (asrText == null || asrText.isEmpty) {
+        throw Exception('Empty audio file passed.');
+      }
+
+      onAsrComplete(asrText.toLowerCase());
 
       final translatedText = await _sentToTranslator(asrText);
       onTranslationComplete(asrText.toLowerCase(), translatedText!.toLowerCase());
