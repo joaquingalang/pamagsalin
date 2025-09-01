@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pamagsalin/services/playlist_player.dart';
+import 'package:pamagsalin/components/list_views/tts_list_view.dart';
 import 'package:pamagsalin/utils/constants.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:audio_waveforms/audio_waveforms.dart';
+import 'package:pamagsalin/utils/translation_state.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:pamagsalin/models/translation_message.dart';
 import 'package:pamagsalin/services/audio_processing_queue.dart';
@@ -12,7 +13,6 @@ import 'package:pamagsalin/components/gradient/gradient_background.dart';
 import 'package:pamagsalin/components/buttons/round_icon_button.dart';
 import 'package:pamagsalin/components/waveforms/translator_waveforms.dart';
 import 'package:pamagsalin/components/list_views/translated_list_view.dart';
-import 'package:pamagsalin/pages/glossary_page.dart';
 
 class VoiceTranslationPage extends StatefulWidget {
   const VoiceTranslationPage({super.key});
@@ -27,6 +27,8 @@ class _VoiceTranslationPageState extends State<VoiceTranslationPage> {
   List<TranslationMessage> messages = [];
   bool isRecording = false;
   bool isListening = false;
+  bool isTtsComplete = true;
+  bool isComplete = false;
 
   final AudioPlayer audioPlayer = AudioPlayer();
   late final TextToSpeechService _ttsService;
@@ -49,12 +51,6 @@ class _VoiceTranslationPageState extends State<VoiceTranslationPage> {
     streamVadRecorder = StreamVadRecorder(
       thresholdDb: -20.0,
       silenceDurationMs: 1000,
-      // onSpike: () {
-      //
-      // },
-      // onDip: () {
-      //   setState(() => isListening = false);
-      // },
       onUtterance: (String audioPath) {
         processingQueue.add(audioPath);
       },
@@ -65,8 +61,11 @@ class _VoiceTranslationPageState extends State<VoiceTranslationPage> {
 
   void _initProcessingQueue() {
     processingQueue = AudioProcessingQueue(
-      onProcessStart: () {
+      onStart: () {
         setState(() => isListening = true);
+      },
+      onComplete: () {
+        setState(() => isComplete = true);
       },
       onAsrComplete: (asrText) {
         setState(() {
@@ -107,14 +106,19 @@ class _VoiceTranslationPageState extends State<VoiceTranslationPage> {
           isRecording = false;
         });
       } else {
-        setState(() => isRecording = true);
         setState(() {
+          isRecording = true;
+          isComplete = false;
           messages = [];
         });
         await recorderController.record();
         await streamVadRecorder.startListening();
       }
     }
+  }
+
+  bool _isFinishedTranslating() {
+    return messages.last.translatedText != null;
   }
 
   @override
@@ -150,28 +154,42 @@ class _VoiceTranslationPageState extends State<VoiceTranslationPage> {
                 const SizedBox(height: 30),
 
                 Text(
-                  isRecording ? 'Listening...' : "Let's see...",
+                  isRecording ? 'Listening...' : 'Start speaking...',
                   style: kPoppinsBodyMedium,
                 ),
 
                 const SizedBox(height: 100),
 
-                TranslatedListView(
-                  messages: messages,
-                  isListening: isListening,
-                ),
+                (isTtsComplete)
+                    ? TranslatedListView(
+                      messages: messages,
+                      isListening: isListening,
+                    )
+                    : TtsListView(
+                      messages: messages,
+                      onComplete:
+                          () => setState(() {
+                            isTtsComplete = true;
+                          }),
+                    ),
 
-                (!isRecording && messages.isNotEmpty
+                (!isRecording && messages.isNotEmpty && isComplete
                     ? Padding(
                       padding: EdgeInsets.only(top: 42),
                       child: RoundIconButton(
                         icon: Icon(
                           Icons.volume_down,
-                          color: Colors.white,
+                          color: !isTtsComplete ? kBlack100 : Colors.white,
                           size: 30,
                         ),
                         padding: EdgeInsets.all(5),
-                        onPressed: () => _ttsService.speakAll(messages),
+                        backgroundColor: !isTtsComplete ? kPink100 : kPink300,
+                        animationDuration: Duration(milliseconds: 500),
+                        onPressed: () async {
+                          setState(() {
+                            isTtsComplete = false;
+                          });
+                        },
                       ),
                     )
                     : SizedBox()),
