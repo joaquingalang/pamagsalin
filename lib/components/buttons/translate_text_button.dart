@@ -25,7 +25,7 @@ class _TranslateTextButtonState extends State<TranslateTextButton> {
           await Future.delayed(Duration(milliseconds: 200));
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => TranslateTextPage()),
+            MaterialPageRoute(builder: (context) => TextTranslatePage()),
           );
           setState(() {
             bottomOffset = 0;
