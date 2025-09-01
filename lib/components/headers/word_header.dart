@@ -97,7 +97,7 @@ class _WordHeaderState extends State<WordHeader> {
                   size: 25,
                 ),
                 padding: EdgeInsets.all(3),
-                backgroundColor: (isClickable) ? kPink200 : kPink100,
+                backgroundColor: (isClickable) ? kPink300 : kPink100,
                 onPressed: _playAudio,
               )
                   : SizedBox(),
@@ -120,7 +120,7 @@ class _WordHeaderState extends State<WordHeader> {
               size: 25,
             ),
             padding: EdgeInsets.all(3),
-            backgroundColor: (isClickable) ? kPink200 : kPink100,
+            backgroundColor: (isClickable) ? kPink300 : kPink100,
             onPressed: _playAudio,
           )
               : SizedBox(),

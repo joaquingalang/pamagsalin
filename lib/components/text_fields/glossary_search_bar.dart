@@ -10,7 +10,7 @@ class GlossarySearchBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: kPink200,
+        color: kPink300,
         borderRadius: BorderRadius.circular(90),
       ),
       child: TextField(
@@ -32,7 +32,7 @@ class GlossarySearchBar extends StatelessWidget {
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(90),
-            borderSide: BorderSide(color: kPink200, width: 2),
+            borderSide: BorderSide(color: kPink300, width: 2),
           ),
         ),
         onSubmitted: (value) {

@@ -12,7 +12,7 @@ class GlosarryListView extends StatelessWidget {
   List<Widget> buildGlossary() {
     List<Widget> glossaryList = [];
     for (EntryModel entry in entries) {
-      glossaryList.add(Divider(color: kPink200));
+      glossaryList.add(Divider(color: kPink300));
 
       Widget entryRow = GlossaryTile(entry: entry);
       glossaryList.add(entryRow);

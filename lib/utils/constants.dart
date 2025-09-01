@@ -8,8 +8,9 @@ const Color kGray200 = Color(0xFF7C7C7C);
 
 // PURPLE COLORS
 const Color kPink100 = Color(0xFFFF97E0);
-const Color kPink200 = Color(0xFF423840);
-const Color kPink300 = Color(0xFF321F2E);
+const Color kPink200 = Color(0xFF715D6D);
+const Color kPink300 = Color(0xFF423840);
+const Color kPink400 = Color(0xFF321F2E);
 
 // TEXT STYLES
 

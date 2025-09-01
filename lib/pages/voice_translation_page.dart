@@ -196,7 +196,7 @@ class _VoiceTranslationPageState extends State<VoiceTranslationPage> {
                   tag: 'record-btn',
                   child: RoundIconButton(
                     padding: EdgeInsets.all(16),
-                    backgroundColor: isRecording ? kPink100 : kPink200,
+                    backgroundColor: isRecording ? kPink100 : kPink300,
                     icon: Icon(
                       Icons.mic,
                       color: isRecording ? kBlack100 : Colors.white,

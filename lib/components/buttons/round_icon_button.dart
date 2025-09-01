@@ -6,7 +6,7 @@ class RoundIconButton extends StatelessWidget {
     super.key,
     required this.icon,
     required this.padding,
-    this.backgroundColor = kPink200,
+    this.backgroundColor = kPink300,
     this.animationDuration,
     this.animationCurve,
     required this.onPressed,

@@ -5,14 +5,14 @@ import 'package:pamagsalin/utils/constants.dart';
 import 'package:pamagsalin/components/gradient/gradient_background.dart';
 import 'package:pamagsalin/services/translation_service.dart';
 
-class TranslateTextPage extends StatefulWidget {
-  const TranslateTextPage({super.key});
+class TextTranslatePage extends StatefulWidget {
+  const TextTranslatePage({super.key});
 
   @override
-  State<TranslateTextPage> createState() => _TranslateTextPageState();
+  State<TextTranslatePage> createState() => _TextTranslatePageState();
 }
 
-class _TranslateTextPageState extends State<TranslateTextPage> {
+class _TextTranslatePageState extends State<TextTranslatePage> {
   final TranslationService _translationService = TranslationService();
   final TextEditingController _textController = TextEditingController();
   String translated = '';
@@ -123,7 +123,7 @@ class _TranslateTextPageState extends State<TranslateTextPage> {
                 padding: const EdgeInsets.only(bottom: 60),
                 child: RoundIconButton(
                   padding: EdgeInsets.all(16),
-                  backgroundColor: isTranslating ? kPink100 : kPink200,
+                  backgroundColor: isTranslating ? kPink100 : kPink300,
                   icon: Icon(
                     Icons.translate,
                     color: isTranslating ? kBlack100 : Colors.white,
