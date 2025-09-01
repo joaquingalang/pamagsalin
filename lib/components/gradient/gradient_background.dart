@@ -44,6 +44,7 @@ class GradientBackground extends StatelessWidget {
           height: screenHeight,
           padding: EdgeInsets.symmetric(horizontal: 32),
           color: kBlack100.withOpacity(0.75),
+          borderRadius: BorderRadius.zero,
           blur: 400,
           child: child,
         ),
