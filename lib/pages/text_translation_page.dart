@@ -81,7 +81,7 @@ class _TextTranslatePageState extends State<TextTranslatePage> {
 
 
                   Text(
-                    isTranslating ? "Translating..." : "Awaiting input...",
+                    isTranslating ? "Translating..." : "Enter a phrase...",
                     style: kPoppinsBodyMedium,
                   ),
 
