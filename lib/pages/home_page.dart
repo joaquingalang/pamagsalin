@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:pamagsalin/components/buttons/main_speed_dial.dart';
 import 'package:pamagsalin/utils/constants.dart';
 import 'package:pamagsalin/utils/time_helpers.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -7,11 +8,7 @@ import 'package:pamagsalin/components/loading_indicator/labeled_loading_indicato
 import 'package:pamagsalin/components/gradient/gradient_background.dart';
 import 'package:pamagsalin/components/gradient//gradient_text.dart';
 import 'package:pamagsalin/components/buttons/round_icon_button.dart';
-import 'package:pamagsalin/components/buttons/record_button.dart';
-import 'package:pamagsalin/components/buttons/translate_text_button.dart';
-import 'package:pamagsalin/pages/glossary_page.dart';
-import 'package:pamagsalin/pages/text_translation_page.dart';
-import 'package:pamagsalin/pages/voice_translation_page.dart';
+import 'package:pamagsalin/pages/about_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -69,11 +66,11 @@ class _HomePageState extends State<HomePage> {
                               () => Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => GlossaryPage(),
+                                  builder: (context) => AboutPage(),
                                 ),
                               ),
                           icon: Icon(
-                            Icons.search,
+                            Icons.info_outline,
                             color: Colors.white,
                             size: 23,
                           ),
@@ -87,27 +84,11 @@ class _HomePageState extends State<HomePage> {
                       'Speak\nKapampangan.\nUnderstand\nEnglish.',
                       style: kPoppinsTitleLarge,
                     ),
-
-                    // Record Button
-                    Expanded(
-                      child: Center(
-                        child: RecordButton(
-                          onPressed:
-                              () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => VoiceTranslationPage(),
-                                ),
-                              ),
-                        ),
-                      ),
-                    ),
-
-                    TranslateTextButton(),
                   ],
                 )
                 : LabeledLoadingIndicator(),
       ),
+      floatingActionButton: _isConnected ? MainSpeedDial() : SizedBox(),
     );
   }
 }
