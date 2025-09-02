@@ -64,7 +64,7 @@ class _TtsListViewState extends State<TtsListView> {
       if (translated != null) {
         await _ttsService.speak(translated);
       }
-      if ((i+1) % 5 == 0) {
+      if ((i+1) % 4 == 0) {
         _scrollDown();
       }
     }
