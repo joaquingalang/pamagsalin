@@ -6,7 +6,7 @@ import 'package:csv/csv.dart';
 class TalabalduganService {
   List<EntryModel> _entries = [];
 
-  /// Loads and parses the CSV from assets into _entries
+  // Loads and parses the CSV from assets into _entries
   Future<void> loadCsv(String assetPath) async {
     final rawData = await rootBundle.loadString(assetPath);
 
@@ -24,12 +24,12 @@ class TalabalduganService {
     }).toList();
   }
 
-  /// Returns all entries
+  // Returns all entries
   List<EntryModel> getAllEntries() {
     return _entries;
   }
 
-  /// Finds all entries containing the [word] in their `word` field (case-insensitive)
+  // Finds all entries containing the [word] in their `word` field (case-insensitive)
   List<EntryModel> searchByWord(String word) {
     final query = word.toLowerCase();
     return _entries
@@ -37,7 +37,7 @@ class TalabalduganService {
         .toList();
   }
 
-  /// Finds a single entry by its [id]
+  // Finds a single entry by its [id]
   EntryModel? getById(int id) {
     try {
       return _entries.firstWhere((entry) => entry.id == id);
