@@ -48,6 +48,7 @@ dependencies:
   flutter_tts: ^4.2.3
   connectivity_plus: ^6.1.5
   flutter_speed_dial: ^7.0.0
+  shared_preferences: ^2.5.3
 
 dev_dependencies:
   flutter_test:
