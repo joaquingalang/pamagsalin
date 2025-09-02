@@ -6,13 +6,13 @@
 
 <p align="center">
     <a href="https://github.com/joaquingalang/pamagsalin/graphs/contributors">
-      <img alt="GitHub Contributors" src="https://img.shields.io/github/contributors/anuraghazra/github-readme-stats" />
+      <img alt="GitHub Contributors" src="https://img.shields.io/github/contributors/joaquingalang/pamagsalin?color=0088ff"/>
     </a>
     <a href="https://github.com/joaquingalang/pamagsalin/issues">
-      <img alt="Issues" src="https://img.shields.io/github/issues/anuraghazra/github-readme-stats?color=0088ff" />
+      <img alt="Issues" src="https://img.shields.io/github/issues/joaquingalang/pamagsalin?color=0088ff"/>
     </a>
     <a href="https://github.com/joaquingalang/pamagsalin/pulls">
-      <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/anuraghazra/github-readme-stats?color=0088ff" />
+      <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/joaquingalang/pamagsalin?color=0088ff"/>
     </a>
   </p>
 
@@ -28,30 +28,26 @@
     <a href="https://github.com/anuraghazra/github-readme-stats/discussions/new?category=q-a">Ask Question</a>
   </p>
 
-## 📖 About the Project  
+## About the Project  
 
-**Pamagsalin** is a Kapampangan-to-English voice-to-text translator developed as part of our undergraduate thesis.  
+Language is a vital tool for communication, yet linguistic barriers persist, especially for regional languages like Kapampangan. **Pamagsalin** is a real-time mobile application designed to bridge the gap between Kapampangan and English speakers. Utilizing advanced technologies such as Wav2Vec 2.0 for Automatic Speech Recognition (ASR) and No Language Left Behind (NLLB) for Neural Machine Translation (NMT), the app will process audio input in Kapampangan and output accurate English translations. 
 
-### 🎯 Motivation  
-The Kapampangan language is slowly dying. This project was built to encourage the continuous use of Kapampangan heritage, preserve the language, and break language barriers using modern technology.  
+## Features
 
-## ✨ Features  
+The Pamagsalin mobile application includes four main features:  
 
-Pamagsalin includes four main pages, each with a unique feature:  
+- **Text Translation Page** – Type in Kapampangan text and get instant English translations.  
+- **Voice Translation Page** – Speak Kapampangan continuously and receive real-time English translations. Includes text-to-speech playback of translated English text.  
+- **Glossary Page** – A Kapampangan-English dictionary with translations, definitions, and audio pronunciations.  
 
-- 🏠 **Home Page** – Simple landing page with navigation buttons to access all features.  
-- 🔤 **Text Translation Page** – Type in Kapampangan text and get instant English translations.  
-- 🎙 **Voice Translation Page** – Speak Kapampangan continuously and receive real-time English translations. Includes text-to-speech playback of translated English text.  
-- 📚 **Glossary Page** – A Kapampangan-English dictionary with translations, definitions, and audio pronunciations.  
-
-## 🛠 Tech Stack  
+## Tech Stack  
 
 - **Flutter** – Cross-platform frontend framework (Android-focused)  
 - **Supabase** – Stores audio files for Kapampangan word pronunciations  
 - **Wav2Vec2** – Automatic speech recognition (hosted via Hugging Face & FastAPI)  
 - **NLLB (No Language Left Behind)** – Translation model (hosted via Hugging Face & FastAPI)  
 
-## 📱 Screenshots  
+## Screenshots  
 
 ### 🏠 Home Page  
 Standard home page. Has navigation buttons that lead to the other pages.  
@@ -69,7 +65,7 @@ Real-time voice-to-text translation. Speak in Kapampangan → get English transl
 A Kapampangan-English dictionary with pronunciations.  
 ![Glossary Page](./screenshots/glossary.png)  
 
-## 🚀 Installation  
+## Installation  
 
 Pamagsalin is available for **Android devices only**.  
 
@@ -78,17 +74,7 @@ Pamagsalin is available for **Android devices only**.
 3. Install it on your Android device.  
 4. Open the app and start translating!  
 
-## 🧩 System Architecture  
-
-[Flutter App] ↔ [FastAPI Backend] ↔ [Hugging Face Models]
-|
-[Supabase]
-
-
-- **Flutter** – handles the UI and real-time interactions  
-- **FastAPI** – API layer for ASR and translation  
-- **Hugging Face** – hosts the Wav2Vec2 (ASR) and NLLB (translation) models  
-- **Supabase** – stores and serves audio pronunciation files
+## Acknowledgements
 
 **Team PESO-LOPHY**  
 Holy Angel University – Computer Science Undergraduate Thesis  
