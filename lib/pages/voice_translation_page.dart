@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pamagsalin/components/list_views/tts_list_view.dart';
 import 'package:pamagsalin/utils/constants.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:audio_waveforms/audio_waveforms.dart';
-import 'package:pamagsalin/utils/translation_state.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:pamagsalin/models/translation_message.dart';
 import 'package:pamagsalin/services/audio_processing_queue.dart';
@@ -13,6 +11,7 @@ import 'package:pamagsalin/components/gradient/gradient_background.dart';
 import 'package:pamagsalin/components/buttons/round_icon_button.dart';
 import 'package:pamagsalin/components/waveforms/translator_waveforms.dart';
 import 'package:pamagsalin/components/list_views/translated_list_view.dart';
+import 'package:pamagsalin/components/list_views/tts_list_view.dart';
 
 class VoiceTranslationPage extends StatefulWidget {
   const VoiceTranslationPage({super.key});
@@ -32,7 +31,7 @@ class _VoiceTranslationPageState extends State<VoiceTranslationPage> {
 
   final AudioPlayer audioPlayer = AudioPlayer();
   late final TextToSpeechService _ttsService;
-  late final AudioProcessingQueue processingQueue;
+  late final AudioProcessingQueue _processingQueue;
   DateTime lastPressedTime = DateTime.now().subtract(Duration(seconds: 2));
 
   @override
@@ -52,7 +51,7 @@ class _VoiceTranslationPageState extends State<VoiceTranslationPage> {
       thresholdDb: -20.0,
       silenceDurationMs: 1000,
       onUtterance: (String audioPath) {
-        processingQueue.add(audioPath);
+        _processingQueue.add(audioPath);
       },
     );
 
@@ -60,12 +59,19 @@ class _VoiceTranslationPageState extends State<VoiceTranslationPage> {
   }
 
   void _initProcessingQueue() {
-    processingQueue = AudioProcessingQueue(
+    _processingQueue = AudioProcessingQueue(
       onStart: () {
         setState(() => isListening = true);
       },
       onComplete: () {
         setState(() => isComplete = true);
+        if (messages.last.translatedText == null) {
+          final newMessages = messages.sublist(0, messages.length - 1);
+          setState(() {
+            messages = newMessages;
+            isListening = false;
+          });
+        }
       },
       onAsrComplete: (asrText) {
         setState(() {
