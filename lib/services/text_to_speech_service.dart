@@ -35,12 +35,12 @@ class TextToSpeechService {
     await _tts.setVolume(volume);
 
     // Make speak() await until the utterance completes.
-    await _tts.awaitSpeakCompletion(true); // Latest API. :contentReference[oaicite:2]{index=2}
+    await _tts.awaitSpeakCompletion(true);
 
     _initialized = true;
   }
 
-  /// Speak a single string. If [interrupt] is true, stops any ongoing speech first.
+  // Speak a single string. If [interrupt] is true, stops any ongoing speech first.
   Future<void> speak(String text, {bool interrupt = false}) async {
     await init();
     if (interrupt) await _tts.stop();
@@ -49,7 +49,7 @@ class TextToSpeechService {
     await _tts.speak(trimmed); // Resolves after completion.
   }
 
-  /// Speak a list of strings sequentially.
+  // Speak a list of strings sequentially.
   Future<void> speakAll(List<TranslationMessage> messages, {bool interrupt = true}) async {
     await init();
     if (interrupt) await _tts.stop();
