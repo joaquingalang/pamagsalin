@@ -19,13 +19,13 @@
   <p align="center">
     <a href="/">View Demo</a>
     ·
-    <a href="https://github.com/anuraghazra/github-readme-stats/issues/new?assignees=&labels=bug&projects=&template=bug_report.yml">Report Bug</a>
+    <a href="https://github.com/joaquingalang/pamagsalin/issues/new?assignees=&labels=bug&projects=&template=bug_report.yml">Report Bug</a>
     ·
-    <a href="https://github.com/anuraghazra/github-readme-stats/issues/new?assignees=&labels=enhancement&projects=&template=feature_request.yml">Request Feature</a>
+    <a href="https://github.com/joaquingalang/pamagsalin/issues/new?assignees=&labels=enhancement&projects=&template=feature_request.yml">Request Feature</a>
     ·
-    <a href="https://github.com/anuraghazra/github-readme-stats/discussions/1770">FAQ</a>
+    <a href="https://github.com/joaquingalang/pamagsalin/discussions/1770">FAQ</a>
     ·
-    <a href="https://github.com/anuraghazra/github-readme-stats/discussions/new?category=q-a">Ask Question</a>
+    <a href="https://github.com/joaquingalang/pamagsalin/discussions/new?category=q-a">Ask Question</a>
   </p>
 
 ## About the Project  
@@ -49,21 +49,44 @@ The Pamagsalin mobile application includes four main features:
 
 ## Screenshots  
 
-### 🏠 Home Page  
-Standard home page. Has navigation buttons that lead to the other pages.  
-![Home Page](./screenshots/home.png)  
+### Home Page  
+Standard home page. Has navigation buttons that lead to the other pages. 
+<br>
+<img height="300" src="https://github.com/user-attachments/assets/c10bdd19-aa7a-4b5e-a7bd-e315c8dd615c">
+<img height="300" src="https://github.com/user-attachments/assets/c99bc0a2-6ee3-4f4c-963a-bef1cdb6c480">
+<br>
 
-### 🔤 Text Translation Page  
+### Text Translation Page  
 Allows you to type in Kapampangan text and translate it.  
-![Text Translation Page](./screenshots/text_translation.png)  
+<br>
+<img height="300" src="https://github.com/user-attachments/assets/1f6a882c-39bb-4644-b8a5-c9a449a8174c">
+<img height="300" src="https://github.com/user-attachments/assets/55b65869-ee8f-45ff-aa8b-99f6a6530b4f">
+<img height="300" src="https://github.com/user-attachments/assets/0b7c48f2-7e52-42b0-af18-94f56a36fd4b">
+<br>
 
-### 🎙 Voice Translation Page  
-Real-time voice-to-text translation. Speak in Kapampangan → get English translations with text-to-speech output.  
-![Voice Translation Page](./screenshots/voice_translation.png)  
+### Voice Translation Page  
+Real-time voice-to-text translation. Speak in Kapampangan → get English translations with text-to-speech output. 
+<br>
+<img height="300" src="https://github.com/user-attachments/assets/c7acd6a3-195e-45c8-a3bd-a4eb8812cac8">
+<img height="300" src="https://github.com/user-attachments/assets/c5ccfb3d-53d6-4a30-ab75-e0207a4f230f">
+<img height="300" src="https://github.com/user-attachments/assets/8d5f6e59-2f4f-4129-9208-9c8c8cce6b67">
+<img height="300" src="https://github.com/user-attachments/assets/965828e2-b195-4ffc-946d-84d41fe2b5c5">
+<img height="300" src="https://github.com/user-attachments/assets/7e52d14c-ea85-48c5-91a3-0afecc14091d">
+<br>
 
-### 📚 Glossary Page  
+### Glossary Page  
 A Kapampangan-English dictionary with pronunciations.  
-![Glossary Page](./screenshots/glossary.png)  
+<br>
+<img height="300" src="https://github.com/user-attachments/assets/2a1d7d66-cc1b-4690-aa3e-3e0bbd374f25">
+<img height="300" src="https://github.com/user-attachments/assets/610bbb83-4e13-4ef8-8566-290f192b0265">
+<br>
+
+## About Page
+Learn about the app. Preview the user manual.
+<br>
+<img height="300" src="https://github.com/user-attachments/assets/b450bad9-23c8-4cab-9c54-95e78477d43c">
+<br>
+
 
 ## Installation  
 
